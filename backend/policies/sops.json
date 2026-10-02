@@ -1,0 +1,416 @@
+{
+  "sops": [
+    {
+      "id": "SOP-001",
+      "name": "Strong wind during cycling",
+      "category": "cycling",
+      "severity": "high",
+      "applies_to": {
+        "activities": ["cycling"]
+      },
+      "rule": {
+        "all": [
+          {
+            "field": "wind_speed_10m",
+            "operator": ">=",
+            "value": 35
+          }
+        ]
+      },
+      "required_weather_fields": [
+        "wind_speed_10m"
+      ],
+      "guidance": {
+        "recommendation": "Avoid outdoor cycling.",
+        "reason": "The wind speed meets the threshold defined by this safety procedure."
+      }
+    },
+
+    {
+      "id": "SOP-002",
+      "name": "High UV during outdoor exercise",
+      "category": "exercise",
+      "severity": "moderate",
+      "applies_to": {
+        "activities": ["exercise", "running", "walking"]
+      },
+      "rule": {
+        "all": [
+          {
+            "field": "uv_index",
+            "operator": ">=",
+            "value": 8
+          }
+        ]
+      },
+      "required_weather_fields": [
+        "uv_index"
+      ],
+      "guidance": {
+        "recommendation": "Avoid prolonged outdoor exercise during these conditions and use appropriate sun protection.",
+        "reason": "The UV index meets the threshold defined by this safety procedure."
+      }
+    },
+
+    {
+      "id": "SOP-003",
+      "name": "Heavy precipitation during outdoor exercise",
+      "category": "exercise",
+      "severity": "high",
+      "applies_to": {
+        "activities": ["exercise", "running", "walking"]
+      },
+      "rule": {
+        "all": [
+          {
+            "field": "precipitation",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      },
+      "required_weather_fields": [
+        "precipitation"
+      ],
+      "guidance": {
+        "recommendation": "Avoid outdoor exercise under these precipitation conditions.",
+        "reason": "The precipitation meets the threshold defined by this safety procedure."
+      }
+    },
+
+    {
+      "id": "SOP-004",
+      "name": "High precipitation probability during outdoor travel",
+      "category": "travel",
+      "severity": "moderate",
+      "applies_to": {
+        "activities": ["travel", "outdoor_travel"]
+      },
+      "rule": {
+        "all": [
+          {
+            "field": "precipitation_probability",
+            "operator": ">=",
+            "value": 70
+          }
+        ]
+      },
+      "required_weather_fields": [
+        "precipitation_probability"
+      ],
+      "guidance": {
+        "recommendation": "Outdoor travel may be affected by the high probability of precipitation.",
+        "reason": "The precipitation probability meets the threshold defined by this safety procedure."
+      }
+    },
+
+    {
+      "id": "SOP-005",
+      "name": "Strong wind during two-wheeler travel",
+      "category": "two_wheeler",
+      "severity": "high",
+      "applies_to": {
+        "activities": ["motorcycle", "scooter", "two_wheeler"]
+      },
+      "rule": {
+        "all": [
+          {
+            "field": "wind_speed_10m",
+            "operator": ">=",
+            "value": 40
+          }
+        ]
+      },
+      "required_weather_fields": [
+        "wind_speed_10m"
+      ],
+      "guidance": {
+        "recommendation": "Avoid two-wheeler travel in these wind conditions.",
+        "reason": "The wind speed meets the threshold defined by this safety procedure."
+      }
+    },
+
+    {
+      "id": "SOP-006",
+      "name": "Severe precipitation conditions",
+      "category": "severe_weather",
+      "severity": "critical",
+      "applies_to": {
+        "activities": [
+          "cycling",
+          "exercise",
+          "running",
+          "walking",
+          "hiking",
+          "travel",
+          "outdoor_travel",
+          "picnic",
+          "park_visit",
+          "outdoor_activity"
+        ]
+      },
+      "rule": {
+        "all": [
+          {
+            "field": "precipitation",
+            "operator": ">=",
+            "value": 10
+          },
+          {
+            "field": "precipitation_probability",
+            "operator": ">=",
+            "value": 70
+          }
+        ]
+      },
+      "required_weather_fields": [
+        "precipitation",
+        "precipitation_probability"
+      ],
+      "guidance": {
+        "recommendation": "Avoid outdoor activity under these severe precipitation conditions.",
+        "reason": "Both precipitation and precipitation probability meet the critical thresholds defined by this safety procedure."
+      }
+    },
+
+    {
+      "id": "SOP-007",
+      "name": "Children during severe outdoor conditions",
+      "category": "children",
+      "severity": "critical",
+      "applies_to": {
+        "activities": ["park_visit", "outdoor_activity", "children_outdoor_activity"]
+      },
+      "rule": {
+        "any": [
+          {
+            "all": [
+              {
+                "field": "precipitation",
+                "operator": ">=",
+                "value": 10
+              },
+              {
+                "field": "precipitation_probability",
+                "operator": ">=",
+                "value": 70
+              }
+            ]
+          },
+          {
+            "field": "temperature_2m",
+            "operator": ">=",
+            "value": 40
+          }
+        ]
+      },
+      "required_weather_fields": [
+        "precipitation",
+        "precipitation_probability",
+        "temperature_2m"
+      ],
+      "guidance": {
+        "recommendation": "Avoid taking children outdoors under these severe weather conditions.",
+        "reason": "The weather meets a critical condition defined by this safety procedure."
+      }
+    },
+
+    {
+      "id": "SOP-008",
+      "name": "Extreme heat for elderly outdoor activity",
+      "category": "elderly",
+      "severity": "high",
+      "applies_to": {
+        "activities": ["elderly_outdoor_activity", "walking", "outdoor_activity"]
+      },
+      "rule": {
+        "all": [
+          {
+            "field": "temperature_2m",
+            "operator": ">=",
+            "value": 40
+          }
+        ]
+      },
+      "required_weather_fields": [
+        "temperature_2m"
+      ],
+      "guidance": {
+        "recommendation": "Avoid outdoor activity under these extreme heat conditions.",
+        "reason": "The temperature meets the threshold defined by this safety procedure."
+      }
+    },
+
+    {
+      "id": "SOP-009",
+      "name": "Extreme heat for pets",
+      "category": "pets",
+      "severity": "high",
+      "applies_to": {
+        "activities": ["pet_walk", "pets", "dog_walk"]
+      },
+      "rule": {
+        "all": [
+          {
+            "field": "temperature_2m",
+            "operator": ">=",
+            "value": 38
+          }
+        ]
+      },
+      "required_weather_fields": [
+        "temperature_2m"
+      ],
+      "guidance": {
+        "recommendation": "Avoid outdoor pet activity under these extreme heat conditions.",
+        "reason": "The temperature meets the threshold defined by this safety procedure."
+      }
+    },
+
+    {
+      "id": "SOP-010",
+      "name": "Poor weather during hiking",
+      "category": "hiking",
+      "severity": "high",
+      "applies_to": {
+        "activities": ["hiking"]
+      },
+      "rule": {
+        "any": [
+          {
+            "field": "wind_speed_10m",
+            "operator": ">=",
+            "value": 40
+          },
+          {
+            "field": "precipitation",
+            "operator": ">=",
+            "value": 5
+          }
+        ]
+      },
+      "required_weather_fields": [
+        "wind_speed_10m",
+        "precipitation"
+      ],
+      "guidance": {
+        "recommendation": "Avoid hiking under these poor weather conditions.",
+        "reason": "The wind or precipitation meets the threshold defined by this safety procedure."
+      }
+    },
+
+    {
+      "id": "SOP-011",
+      "name": "Picnic suitability",
+      "category": "picnic",
+      "severity": "low",
+      "applies_to": {
+        "activities": ["picnic"]
+      },
+      "rule": {
+        "all": [
+          {
+            "field": "temperature_2m",
+            "operator": ">=",
+            "value": 15
+          },
+          {
+            "field": "temperature_2m",
+            "operator": "<=",
+            "value": 35
+          },
+          {
+            "field": "precipitation",
+            "operator": "<=",
+            "value": 1
+          },
+          {
+            "field": "precipitation_probability",
+            "operator": "<=",
+            "value": 30
+          },
+          {
+            "field": "wind_speed_10m",
+            "operator": "<=",
+            "value": 25
+          }
+        ]
+      },
+      "required_weather_fields": [
+        "temperature_2m",
+        "precipitation",
+        "precipitation_probability",
+        "wind_speed_10m"
+      ],
+      "guidance": {
+        "recommendation": "The defined conditions are suitable for a picnic.",
+        "reason": "Temperature, precipitation, precipitation probability, and wind all fall within the picnic conditions defined by this safety procedure."
+      }
+    },
+
+    {
+      "id": "SOP-012",
+      "name": "Severe conditions for general outdoor activity",
+      "category": "general",
+      "severity": "critical",
+      "applies_to": {
+        "activities": ["outdoor_activity", "park_visit", "recreation"]
+      },
+      "rule": {
+        "any": [
+          {
+            "all": [
+              {
+                "field": "precipitation",
+                "operator": ">=",
+                "value": 10
+              },
+              {
+                "field": "precipitation_probability",
+                "operator": ">=",
+                "value": 70
+              }
+            ]
+          },
+          {
+            "field": "temperature_2m",
+            "operator": ">=",
+            "value": 42
+          }
+        ]
+      },
+      "required_weather_fields": [
+        "precipitation",
+        "precipitation_probability",
+        "temperature_2m"
+      ],
+      "guidance": {
+        "recommendation": "Avoid outdoor activity under these severe conditions.",
+        "reason": "The weather meets a critical condition defined by this safety procedure."
+      }
+    },
+    {
+    "id": "SOP-013",
+    "name": "Extreme wind during picnic",
+    "category": "picnic",
+    "severity": "high",
+    "applies_to": {
+        "activities": [
+            "picnic"
+        ]
+    },
+    "rule": {
+        "field": "wind_speed_10m",
+        "operator": ">=",
+        "value": 30
+    },
+    "required_weather_fields": [
+        "wind_speed_10m"
+    ],
+    "guidance": {
+        "recommendation": "Avoid the picnic under these wind conditions.",
+        "reason": "The wind speed meets the threshold defined by this safety procedure."
+    }
+}
+  ]
+}
