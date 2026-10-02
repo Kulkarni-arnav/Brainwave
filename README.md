@@ -172,6 +172,25 @@ python evals/live_weather_evals.py
 
 The live check depends on changing real-world weather and is not a substitute for the deterministic tests. It may report `NOT APPLICABLE` when current conditions do not meet the severe-weather thresholds.
 
+## Deploy on Render
+
+The repository includes `render.yaml` for deployment as a single Render Web Service.
+
+1. Sign in to [Render](https://render.com) and select **New +** -> **Blueprint**.
+2. Connect the GitHub repository `Kulkarni-arnav/Brainwave`.
+3. Select the `main` branch and apply the blueprint.
+4. Open the service's **Environment** settings and add `GEMINI_API_KEY`.
+5. Deploy the service and open the generated `onrender.com` URL.
+
+Render uses the following commands from `render.yaml`:
+
+```text
+Build: pip install -r requirements.txt
+Start: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+```
+
+The Open-Meteo APIs do not require an API key. The Gemini key must be configured as a Render environment variable; never commit it to GitHub. The current frontend calls `http://127.0.0.1:8000/chat`, so after deploying the backend, update that URL in `frontend/index.html` to the Render service URL and push the change, or serve the frontend locally while pointing it at the deployed API.
+
 ## Project Structure
 
 ```text
