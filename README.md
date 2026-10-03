@@ -85,7 +85,7 @@ Create a `.env` file in the project root:
 GEMINI_API_KEY=your_gemini_api_key
 ```
 
-The key is loaded by `backend/llm/client.py`. Do not commit `.env` or expose the API key in the frontend.
+The key is loaded by `backend/llm/client.py`. Do not commit `.env` or expose the API key in the frontend. If a key is accidentally exposed, revoke it immediately, create a replacement, and update the local `.env` and Render environment variable.
 
 ## Run the Application
 
@@ -189,7 +189,7 @@ Build: pip install -r requirements.txt
 Start: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
 ```
 
-The Open-Meteo APIs do not require an API key. The Gemini key must be configured as a Render environment variable; never commit it to GitHub. The current frontend calls `http://127.0.0.1:8000/chat`, so after deploying the backend, update that URL in `frontend/index.html` to the Render service URL and push the change, or serve the frontend locally while pointing it at the deployed API.
+The Open-Meteo APIs do not require an API key. The Gemini key must be configured as a Render environment variable; never commit it to GitHub. The frontend uses the same-origin `/chat` path, so it works when served by the deployed FastAPI service without any URL changes.
 
 ## Project Structure
 
@@ -224,7 +224,7 @@ The Open-Meteo APIs do not require an API key. The Gemini key must be configured
 - Weather data can become stale or unavailable. The application fails closed when it cannot verify the required inputs.
 - Session state is stored in process memory, so it is lost when the server restarts and is not suitable for multi-process production deployment without a shared session store.
 - CORS is currently configured to allow all origins for local development. Production deployments should restrict `allow_origins` to trusted frontend origins.
-- The frontend currently expects the backend at `http://127.0.0.1:8000`; update that URL before deploying the frontend separately.
+- The frontend uses a same-origin API path and is served by the FastAPI service. If it is deployed separately in the future, configure that frontend's API base URL for the deployed backend.
 - API calls use a 10-second timeout, but retries, authentication, rate limiting, and observability would be needed for production hardening.
 
 ## Future Improvements
